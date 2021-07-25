@@ -21,9 +21,20 @@ class HomeScreen extends React.Component
 
     getWord = (word) =>
     {
-        var searchWord = word;
-        var lexCat = (db[searchWord] === null) ? db[searchWord].lexicalCategory : '';
-        var definition = (db[searchWord] === null) ? db[searchWord].definition : 'not in databse';
+        var searchWord = word.toLowerCase();
+        var lexCat;
+        var definition;
+
+        if(db[searchWord])
+        {
+            var wrd = db[searchWord];
+            lexCat = wrd["lexicalCategory"];
+            definition = wrd["definition"];
+        }else
+        {
+            lexCat = '';
+            definition = 'this is not available in the database'
+        }
 
         this.setState({lexicalCategory : lexCat, defination: definition});
     }
